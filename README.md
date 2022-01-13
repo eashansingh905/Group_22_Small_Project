@@ -1,3 +1,11 @@
-Hello Group 22
+Group 22 Small Project:
 
-Small Project:
+Roles :
+
+    Frontend Team:
+
+
+    API Team:
+        Eli Ferguson
+
+    Database Team:
