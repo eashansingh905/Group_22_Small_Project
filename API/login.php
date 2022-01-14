@@ -1,14 +1,12 @@
 <?php
 
-    //$ creates a var = 0 for int, '' for char, "" for string
-
     $inData = getRequestInfo();
 
     $id = 0;
     $firstName = "";
     $lastName = "";
 
-    $connection = new mysqli(hostname:"localhost", username:"ADMIN", password:"Password", database:"COP4331");
+    $connection = new mysqli(hostname:"localhost", username:"USER", password:"PASSWORD", database:"COP4331");
 
     if($connection->connect_error)
     {
@@ -17,7 +15,45 @@
     else
     {
         $prepString = "SELECT ID, firstName, lastName FROM Users WHERE Login=? AND Password=?";
+        
         $statement = $connection->prepare($prepString);
-        $statement->bind_param(types:"ss", var1:$inData["login"], var2:$inData["password"])
+        $statement->bind_param(types:"ss", var1:$inData["login"], var2:$inData["password"]); //? var1 and var2 are placeholders, they may not work and can me deleted
+        $statement->execute();
+
+        $result = $statement->get_result();
+
+        if ($row = $result->fetch_assoc())
+        {
+            returnWithInfo($row["firstName"], $row["lastName"], $row["id"]);
+        }
+        else
+        {
+            returnWithError("No Records Found");
+        }
+
+        $statement->close();
+        $connection->close();
+    }
+
+    function getRequestInfo()
+    {
+        return jason_decode(file_get_contents("php://input"), true);
+    }
+
+    function sendResultInfoAsJson($obj)
+    {
+        header("Content-type: application/json");
+        echo $obj;
+    }
+
+    function returnWithError($err)
+    {
+        $retValue = '{"id":0, "firstName":"", "lastName":"", "error":"' . $err . '"}';
+        sendResultInfoAsJson($retValue);
+    }
+
+    function returnWithInfo($firstName, $lastName, $id)
+    {
+        $retValue = '{"id":" . $id . ", "firstName":"' . $firstName . '", "lastName":"' . $lastName . '", "error":""}';
     }
 ?>
