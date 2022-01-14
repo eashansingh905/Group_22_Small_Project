@@ -9,7 +9,7 @@ Group 22 Small Project:
     ex: login -> login
     ex: password -> password
 
-Digital Ocean Website URL: ?
+Digital Ocean Website URL: cop4516.xyz
 
 Roles :
 
@@ -33,3 +33,5 @@ Roles :
         - Eashan Singh
 
         Database Todo: Completed.
+        
+        
