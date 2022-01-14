@@ -37,7 +37,7 @@
 
     function getRequestInfo()
     {
-        return jason_decode(file_get_contents("php://input"), true);
+        return jason_decode(file_get_contents("php://input"), true); //? this line was in his login.php but I don't see this function
     }
 
     function sendResultInfoAsJson($obj)
