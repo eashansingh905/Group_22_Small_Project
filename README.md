@@ -32,4 +32,4 @@ Roles :
         - Sang Nguyen
         - Eashan Singh
 
-        Database Todo: Completed
+        Database Todo: Completed.
